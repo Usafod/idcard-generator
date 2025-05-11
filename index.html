@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ID Card Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+      gap: 40px;
+    }
+
+    .form-container, .id-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-container {
+      width: 300px;
+    }
+
+    .form-container h2 {
+      margin-bottom: 10px;
+    }
+
+    .form-container label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .form-container button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .id-card {
+      width: 300px;
+      text-align: center;
+    }
+
+    .id-card h2 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .photo-placeholder {
+      width: 100px;
+      height: 100px;
+      background: #ddd;
+      border-radius: 50%;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .id-info {
+      text-align: center;
+      margin-top: 15px;
+
+    }
+
+    .id-info p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    .hire-button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Create ID Card</h2>
+    <label for="photo">Photo:</label>
+    <input type="file" id="photo" accept="image/*">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email">
+
+    <label for="department">Department:</label>
+    <input type="text" id="department">
+
+    <label for="skills">Skills:</label>
+    <input type="text" id="skills">
+
+    <button type="button" onclick="updateIDCard()">Generate</button>
+  </div>
+
+  <div class="id-card">
+    <h2>U-Inspire Web Development</h2>
+    <div class="photo-placeholder" id="id-photo">
+      <span>Photo</span>
+    </div>
+    <div class="id-info">
+      <p><strong>Name</strong> <span id="id-name"><br>Your Name</span></p>
+      <p><strong>Emails</strong> <span id="id-email"><br>your@email.com</span></p>
+      <p><strong>Department</strong><span id="id-department"><br>Your Department</span></p>
+      <p><strong>Skills</strong> <span id="id-skills"><br>HTML, CSS, JS</span></p>
+    </div>
+    <button class="hire-button">Hire Me</button>
+  </div>
+
+  <script>
+    function updateIDCard() {
+      // Update text fields
+      document.getElementById("id-name").textContent = document.getElementById("name").value;
+      document.getElementById("id-email").textContent = document.getElementById("email").value;
+      document.getElementById("id-department").textContent = document.getElementById("department").value;
+      document.getElementById("id-skills").textContent = document.getElementById("skills").value;
+
+      // Handle image upload
+      const photoInput = document.getElementById("photo");
+      const photoPreview = document.getElementById("id-photo");
+
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          photoPreview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Photo">`;
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      }
+    }
+  </script>
+
+</body>
+</html>
